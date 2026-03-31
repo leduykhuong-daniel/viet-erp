@@ -3,7 +3,7 @@
  * Vietnamese banking standards and VietQR support
  */
 
-import { BankAccount, BankInfo, BankCode } from "../types/index.js";
+import type { BankAccount, BankInfo, BankCode } from "../types/index.js";
 
 /**
  * Bank transfer details
@@ -55,11 +55,7 @@ export interface VietQRParsed {
   valid: boolean;
 }
 
-export default {
+export type {
   BankAccount,
   BankInfo,
-  BankTransfer,
-  BankReconciliation,
-  VietQRCode,
-  VietQRParsed,
 };

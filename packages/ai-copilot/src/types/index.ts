@@ -74,3 +74,36 @@ export interface CopilotModuleDefinition {
   tools: CopilotTool[];
   systemPrompt: string;
 }
+
+export interface CopilotResponse {
+  message: ChatMessage;
+  confidence: number;
+}
+
+export interface StreamChunk {
+  type: 'text' | 'tool_use' | 'done';
+  content?: string;
+  toolName?: string;
+  toolInput?: Record<string, unknown>;
+}
+
+export interface ModuleAssistant {
+  module: CopilotModule;
+  systemPrompt: string;
+  tools: CopilotTool[];
+  contextBuilder: (context: ConversationContext) => Promise<string>;
+}
+
+export interface DataCard {
+  title: string;
+  type: 'metric' | 'table' | 'chart';
+  data: unknown;
+  source: string;
+}
+
+export interface SuggestedAction {
+  label: string;
+  action: string;
+  module?: CopilotModule;
+  params?: Record<string, unknown>;
+}

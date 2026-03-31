@@ -7,7 +7,6 @@
     "declarationMap": true,
     "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -16,7 +15,6 @@
     "isolatedModules": true,
     "paths": {
       "@vierp/shared": ["../shared/src"],
-      "@vierp/database": ["../database/src"],
       "@vierp/events": ["../events/src"],
       "@vierp/feature-flags": ["../feature-flags/src"]
     }

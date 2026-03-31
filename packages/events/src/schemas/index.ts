@@ -3,6 +3,13 @@
 // Re-export all event schemas
 // ============================================================
 
+// Local imports for building AllEventSchemas
+import { CRMEventSchemas } from './crm.events';
+import { AccountingEventSchemas } from './accounting.events';
+import { EcommerceEventSchemas } from './ecommerce.events';
+import { MRPEventSchemas } from './mrp.events';
+import { HRMEventSchemas } from './hrm.events';
+
 // CRM Schemas
 export {
   LeadCreatedSchema,

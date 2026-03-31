@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 /** GET /api/costing — Lịch sử tính giá */
 export async function GET(req: NextRequest) {
   const customerId = req.nextUrl.searchParams.get('customerId') || '';

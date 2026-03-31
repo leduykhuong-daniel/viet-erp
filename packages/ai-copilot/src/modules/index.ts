@@ -45,7 +45,7 @@ Quy định: Bộ luật Lao động 2019, Luật BHXH, Luật Thuế TNCN.`,
     }),
   ],
 
-  contextBuilder: async (context) => {
+  contextBuilder: async (context: any) => {
     const { contextString } = await buildERPContext(context);
     return `Module: Quản lý nhân sự (HRM)\n${contextString}`;
   },
@@ -99,7 +99,7 @@ Thuế suất: VAT 10%/8%/5%/0%, TNDN 20%, TNCN luỹ tiến 5-35%.`,
     }),
   ],
 
-  contextBuilder: async (context) => {
+  contextBuilder: async (context: any) => {
     const { contextString } = await buildERPContext(context);
     return `Module: Kế toán & Tài chính\nChuẩn mực: VAS TT200\n${contextString}`;
   },
@@ -143,7 +143,7 @@ WIP (Work In Progress), QC (Quality Control).`,
     }),
   ],
 
-  contextBuilder: async (context) => {
+  contextBuilder: async (context: any) => {
     const { contextString } = await buildERPContext(context);
     return `Module: Quản lý sản xuất (MRP)\n${contextString}`;
   },
@@ -185,7 +185,7 @@ Pipeline: Lead → Qualified → Proposal → Negotiation → Won/Lost.`,
     }),
   ],
 
-  contextBuilder: async (context) => {
+  contextBuilder: async (context: any) => {
     const { contextString } = await buildERPContext(context);
     return `Module: Quản lý khách hàng (CRM)\n${contextString}`;
   },
@@ -220,7 +220,7 @@ và cung cấp tổng quan về tình hình doanh nghiệp.`,
     }),
   ],
 
-  contextBuilder: async (context) => {
+  contextBuilder: async (context: any) => {
     const { contextString } = await buildERPContext(context);
     return `Module: Tổng quan ERP\n${contextString}`;
   },
@@ -231,13 +231,13 @@ và cung cấp tổng quan về tình hình doanh nghiệp.`,
 function createQueryTool(
   name: string,
   description: string,
-  inputSchema: Record<string, unknown>
-): CopilotTool {
+  inputSchema: any
+): CopilotTool & { execute: (input: any, context: any) => Promise<string> } {
   return {
     name,
     description,
     inputSchema,
-    execute: async (input, context) => {
+    execute: async (input: any, context: any) => {
       // Placeholder — each module would implement actual data queries
       return JSON.stringify({
         tool: name,

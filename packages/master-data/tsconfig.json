@@ -14,13 +14,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "paths": {
-      "@vierp/shared": ["../shared/src"],
-      "@vierp/database": ["../database/src"],
-      "@vierp/events": ["../events/src"],
-      "@vierp/auth": ["../auth/src"]
-    }
+    "isolatedModules": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]

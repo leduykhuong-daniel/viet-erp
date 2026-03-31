@@ -6,14 +6,11 @@
 
 import {
   EInvoice,
-  EInvoiceStatus,
-  PaymentMethod,
   CURRENCY_CODE,
 } from "../types/index.js";
-import {
+import type {
   EInvoiceValidationResult,
   EInvoiceSignature,
-  EInvoiceTransmission,
 } from "./types.js";
 
 /**
@@ -249,9 +246,9 @@ export function generateEInvoiceXML(invoice: EInvoice): string {
     <BankAccount>
       <Number>${escapeXML(invoice.seller.accountNumber)}</Number>
       <BankName>${escapeXML(invoice.seller.bankName)}</BankName>`;
-    if (invoice.seller.swiftCode) {
+    if ((invoice.seller as any).swiftCode) {
       xml += `
-      <SwiftCode>${escapeXML(invoice.seller.swiftCode)}</SwiftCode>`;
+      <SwiftCode>${escapeXML((invoice.seller as any).swiftCode)}</SwiftCode>`;
     }
     xml += `
     </BankAccount>`;

@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { ArrowUp, ArrowDown, TrendingFlat } from 'lucide-react';
+import { ArrowUp, ArrowDown, Minus as TrendingFlat } from 'lucide-react';
 import clsx from 'clsx';
 import { KPICard as KPICardType } from '../types';
 

@@ -246,7 +246,7 @@ export class SearchSync {
     result: unknown
   ): SearchSyncPayload | null {
     const resultData = result as Record<string, unknown>;
-    const documentId = String(resultData?.id || args?.data?.id || args?.where?.id);
+    const documentId = String(resultData?.id || (args?.data as any)?.id || (args?.where as any)?.id);
 
     if (!documentId) {
       console.warn(`No ID found for ${entity} sync operation`);
@@ -265,7 +265,7 @@ export class SearchSync {
     const data: DocumentIndexPayload = {
       id: documentId,
       entity,
-      module: this.getModuleForEntity(entity),
+      module: this.getModuleForEntity(entity) as any,
       title: String(resultData?.name || resultData?.title || ''),
       description: String(resultData?.description || ''),
       url: String(resultData?.url || `/${entity.toLowerCase()}/${documentId}`),

@@ -26,7 +26,7 @@ import type { z } from 'zod';
  */
 export class EventBus {
   private config: EventBusConfig;
-  private subscriptions: Map<string, TypedEventHandler> = new Map();
+  private subscriptions: Map<string, TypedEventHandler<any>> = new Map();
 
   constructor(config: EventBusConfig) {
     this.config = config;
@@ -49,18 +49,18 @@ export class EventBus {
   ): Promise<BaseEvent> {
     const schema = AllEventSchemas[eventType];
     if (!schema) {
-      throw new Error(`Unknown event type: ${eventType}`);
+      throw new Error(`Unknown event type: ${String(eventType)}`);
     }
 
     // Validate payload
     const validatedPayload = schema.parse(payload);
 
     const correlationId = context.correlationId || generateCorrelationId();
-    const causationId = context.causationId || generateCausationId();
+    const causationId = context.causationId || generateCausationId('');
 
     const event: BaseEvent = {
       id: `${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 9)}`,
-      type: eventType,
+      type: String(eventType),
       source: this.config.module,
       timestamp: new Date().toISOString(),
       correlationId,
@@ -84,13 +84,13 @@ export class EventBus {
       });
 
       console.log(
-        `[EventBus] Published ${eventType} → stream=${ack.stream}, seq=${ack.seq}, id=${event.id}`
+        `[EventBus] Published ${String(eventType)} → stream=${ack.stream}, seq=${ack.seq}, id=${event.id}`
       );
 
       return event;
     } catch (error) {
       console.error(
-        `[EventBus] Failed to publish ${eventType}:`,
+        `[EventBus] Failed to publish ${String(eventType)}:`,
         error instanceof Error ? error.message : error
       );
       throw error;
@@ -108,10 +108,10 @@ export class EventBus {
   ): Promise<void> {
     const schema = AllEventSchemas[eventType];
     if (!schema) {
-      throw new Error(`Unknown event type: ${eventType}`);
+      throw new Error(`Unknown event type: ${String(eventType)}`);
     }
 
-    const consumerGroup = options?.consumerGroup || `${this.config.module}-${eventType}`;
+    const consumerGroup = options?.consumerGroup || `${this.config.module}-${String(eventType)}`;
     const maxRetries = options?.maxRetries ?? 3;
 
     const js = await getJetStream();
@@ -125,7 +125,7 @@ export class EventBus {
         ackPolicy: 'explicit' as const,
       };
 
-      const sub = await js.subscribe(eventType as string, opts);
+      const sub = await js.subscribe(String(eventType), opts as any);
 
       // Start consuming
       (async () => {
@@ -140,17 +140,17 @@ export class EventBus {
             };
 
             // Process and handle event
-            await processIncomingEvent(event);
-            await handler(event);
+            await processIncomingEvent(event as any);
+            await handler(event as any);
 
             // Acknowledge successful processing
             msg.ack();
             console.log(
-              `[EventBus] Processed ${eventType} from ${consumerGroup}, id=${event.id}`
+              `[EventBus] Processed ${String(eventType)} from ${consumerGroup}, id=${event.id}`
             );
           } catch (error) {
             console.error(
-              `[EventBus] Error processing ${eventType} in ${consumerGroup}:`,
+              `[EventBus] Error processing ${String(eventType)} in ${consumerGroup}:`,
               error instanceof Error ? error.message : error
             );
 
@@ -174,11 +174,11 @@ export class EventBus {
         console.error(`[EventBus] Subscription error in ${consumerGroup}:`, error);
       });
 
-      this.subscriptions.set(eventType, handler);
-      console.log(`[EventBus] Subscribed to ${eventType} with consumer group ${consumerGroup}`);
+      this.subscriptions.set(String(eventType), handler as any);
+      console.log(`[EventBus] Subscribed to ${String(eventType)} with consumer group ${consumerGroup}`);
     } catch (error) {
       console.error(
-        `[EventBus] Failed to subscribe to ${eventType}:`,
+        `[EventBus] Failed to subscribe to ${String(eventType)}:`,
         error instanceof Error ? error.message : error
       );
       throw error;
@@ -205,7 +205,7 @@ export class EventBus {
     const results: BaseEvent[] = [];
 
     for (const [index, { eventType, payload }] of events.entries()) {
-      const causationId = index === 0 ? generateCausationId() : undefined;
+      const causationId = index === 0 ? generateCausationId('') : undefined;
 
       const event = await this.publish(eventType, payload, {
         ...context,

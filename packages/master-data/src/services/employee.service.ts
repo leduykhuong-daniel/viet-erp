@@ -3,7 +3,8 @@
 // CRUD + sync for Employee master data
 // ============================================================
 
-import { prisma } from '@vierp/database';
+import { prisma as _prisma } from '@vierp/database';
+const prisma = _prisma as any;
 import type { Employee } from '@vierp/shared';
 import type { MasterDataQuery, MasterDataEntity } from '../types';
 import { BaseMasterDataService, MasterDataError } from './base.service';
@@ -161,7 +162,7 @@ export class EmployeeService extends BaseMasterDataService<Employee & { id: stri
       distinct: ['department'],
       orderBy: { department: 'asc' },
     });
-    return result.map(r => r.department).filter(Boolean) as string[];
+    return result.map((r: any) => r.department).filter(Boolean) as string[];
   }
 
   async getStats(tenantId: string) {

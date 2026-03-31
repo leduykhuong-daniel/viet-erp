@@ -88,12 +88,3 @@ export interface EInvoiceStatusResponse {
   };
 }
 
-export default {
-  EInvoiceValidationResult,
-  EInvoiceSignature,
-  EInvoiceTransmission,
-  EInvoiceCancellation,
-  EInvoiceReplacement,
-  EInvoiceLookupParams,
-  EInvoiceStatusResponse,
-};

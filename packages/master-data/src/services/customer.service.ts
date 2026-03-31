@@ -3,7 +3,8 @@
 // CRUD + sync for Customer master data
 // ============================================================
 
-import { prisma } from '@vierp/database';
+import { prisma as _prisma } from '@vierp/database';
+const prisma = _prisma as any;
 import type { Customer } from '@vierp/shared';
 import type { MasterDataQuery, MasterDataEntity } from '../types';
 import { BaseMasterDataService, MasterDataError } from './base.service';

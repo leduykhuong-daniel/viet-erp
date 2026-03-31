@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 /** GET /api/items — Danh sách vật tư + filter */
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;

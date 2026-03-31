@@ -39,12 +39,12 @@ export interface IEInvoiceProvider {
 export class VNPTProvider implements IEInvoiceProvider {
   name: EInvoiceProvider = EInvoiceProvider.VNPT;
   apiEndpoint: string = "https://api.vnpt.vn/einvoice/v1";
-  private apiKey: string = "";
-  private apiSecret: string = "";
+  private _apiKey: string = "";
+  private _apiSecret: string = "";
 
   constructor(apiKey: string, apiSecret: string) {
-    this.apiKey = apiKey;
-    this.apiSecret = apiSecret;
+    this._apiKey = apiKey;
+    this._apiSecret = apiSecret;
   }
 
   async authenticate(): Promise<void> {
@@ -91,7 +91,7 @@ export class VNPTProvider implements IEInvoiceProvider {
     };
   }
 
-  async lookup(params: EInvoiceLookupParams): Promise<EInvoice[]> {
+  async lookup(_params: EInvoiceLookupParams): Promise<EInvoice[]> {
     // Implementation: search for invoices via VNPT
     // GET to apiEndpoint/invoices/search with query parameters
     return [];
@@ -117,12 +117,12 @@ export class VNPTProvider implements IEInvoiceProvider {
 export class ViettelProvider implements IEInvoiceProvider {
   name: EInvoiceProvider = EInvoiceProvider.VIETTEL;
   apiEndpoint: string = "https://api.viettel.com.vn/einvoice/v2";
-  private apiKey: string = "";
-  private clientId: string = "";
+  private _apiKey: string = "";
+  private _clientId: string = "";
 
   constructor(apiKey: string, clientId: string) {
-    this.apiKey = apiKey;
-    this.clientId = clientId;
+    this._apiKey = apiKey;
+    this._clientId = clientId;
   }
 
   async authenticate(): Promise<void> {
@@ -169,7 +169,7 @@ export class ViettelProvider implements IEInvoiceProvider {
     };
   }
 
-  async lookup(params: EInvoiceLookupParams): Promise<EInvoice[]> {
+  async lookup(_params: EInvoiceLookupParams): Promise<EInvoice[]> {
     // Implementation: search for invoices via Viettel
     // GET to apiEndpoint/hoax with query parameters
     return [];
@@ -195,12 +195,12 @@ export class ViettelProvider implements IEInvoiceProvider {
 export class FPTProvider implements IEInvoiceProvider {
   name: EInvoiceProvider = EInvoiceProvider.FPT;
   apiEndpoint: string = "https://api.fpt.com.vn/einvoice/v1";
-  private username: string = "";
-  private password: string = "";
+  private _username: string = "";
+  private _password: string = "";
 
   constructor(username: string, password: string) {
-    this.username = username;
-    this.password = password;
+    this._username = username;
+    this._password = password;
   }
 
   async authenticate(): Promise<void> {
@@ -247,7 +247,7 @@ export class FPTProvider implements IEInvoiceProvider {
     };
   }
 
-  async lookup(params: EInvoiceLookupParams): Promise<EInvoice[]> {
+  async lookup(_params: EInvoiceLookupParams): Promise<EInvoice[]> {
     // Implementation: search for invoices via FPT
     // POST to apiEndpoint/invoices/search
     return [];
@@ -273,12 +273,12 @@ export class FPTProvider implements IEInvoiceProvider {
 export class BKAVProvider implements IEInvoiceProvider {
   name: EInvoiceProvider = EInvoiceProvider.BKAV;
   apiEndpoint: string = "https://api.bkav.com.vn/invoice/v1";
-  private partnerCode: string = "";
-  private partnerKey: string = "";
+  private _partnerCode: string = "";
+  private _partnerKey: string = "";
 
   constructor(partnerCode: string, partnerKey: string) {
-    this.partnerCode = partnerCode;
-    this.partnerKey = partnerKey;
+    this._partnerCode = partnerCode;
+    this._partnerKey = partnerKey;
   }
 
   async authenticate(): Promise<void> {
@@ -325,7 +325,7 @@ export class BKAVProvider implements IEInvoiceProvider {
     };
   }
 
-  async lookup(params: EInvoiceLookupParams): Promise<EInvoice[]> {
+  async lookup(_params: EInvoiceLookupParams): Promise<EInvoice[]> {
     // Implementation: search for invoices via BKAV
     // POST to apiEndpoint/SearchInvoice
     return [];

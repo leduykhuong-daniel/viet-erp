@@ -143,12 +143,12 @@ const VIETNAMESE_BANKS: Record<BankCode, BankInfo> = {
     swiftCode: "PGBKVNVX",
     bin: "970445",
   },
-  TPB: {
-    code: BankCode.TPB,
-    name: "Ngân hàng TP Bank",
-    englishName: "Tien Phuong Bank",
-    swiftCode: "TPBKVNVX",
-    bin: "970423",
+  BAB: {
+    code: BankCode.BAB,
+    name: "Ngân hàng Bắc Á",
+    englishName: "Bac A Bank",
+    swiftCode: "NASCVNVX",
+    bin: "970409",
   },
 };
 

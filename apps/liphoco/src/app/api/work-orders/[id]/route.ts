@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 /** GET /api/work-orders/:id */
 export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
   const wo = await prisma.workOrder.findUnique({

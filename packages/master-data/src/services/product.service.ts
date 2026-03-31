@@ -3,7 +3,8 @@
 // CRUD + sync for Product master data
 // ============================================================
 
-import { prisma } from '@vierp/database';
+import { prisma as _prisma } from '@vierp/database';
+const prisma = _prisma as any;
 import type { Product } from '@vierp/shared';
 import type { MasterDataQuery, MasterDataEntity } from '../types';
 import { BaseMasterDataService, MasterDataError } from './base.service';
@@ -152,7 +153,7 @@ export class ProductService extends BaseMasterDataService<Product & { id: string
       distinct: ['category'],
       orderBy: { category: 'asc' },
     });
-    return result.map(r => r.category).filter(Boolean) as string[];
+    return result.map((r: any) => r.category).filter(Boolean) as string[];
   }
 
   async getStats(tenantId: string) {

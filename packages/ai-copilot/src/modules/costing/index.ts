@@ -9,7 +9,7 @@
 // Sử dụng: import { costingModule } from '@vierp/ai-copilot/modules/costing'
 // ============================================================
 
-import type { CopilotTool, ToolCall, ToolResult } from '../types';
+import type { CopilotTool, ToolCall, ToolResult } from '../../types';
 
 // ─── Constants: Đơn giá gia công (cập nhật: 2026-03-11) ─────
 

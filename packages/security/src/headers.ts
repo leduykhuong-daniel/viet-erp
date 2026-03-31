@@ -81,7 +81,7 @@ export function securityHeaders(config: SecurityHeadersConfig = {}): Array<{
   };
 
   if (reportUri) {
-    finalCSPDirectives['report-uri'] = [reportUri];
+    (finalCSPDirectives as any)['report-uri'] = [reportUri];
   }
 
   const cspValue = generateCSP(finalCSPDirectives);

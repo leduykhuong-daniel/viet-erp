@@ -3,7 +3,7 @@
  * Nghị định 44/2023/NĐ-CP - Current Vietnamese VAT regulations
  */
 
-import { VATRate, VATExemptCategory } from "../types/index.js";
+import { VATRate } from "../types/index.js";
 
 /**
  * Calculate VAT amount from a base amount

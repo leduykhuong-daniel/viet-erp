@@ -65,8 +65,8 @@ export class SupplierService extends BaseMasterDataService<Supplier & { id: stri
     const sortBy = query.sortBy || 'createdAt';
     const sortOrder = query.sortOrder || 'desc';
     records.sort((a, b) => {
-      const av = (a as Record<string, unknown>)[sortBy];
-      const bv = (b as Record<string, unknown>)[sortBy];
+      const av = (a as unknown as Record<string, unknown>)[sortBy];
+      const bv = (b as unknown as Record<string, unknown>)[sortBy];
       if (av === bv) return 0;
       const cmp = av! > bv! ? 1 : -1;
       return sortOrder === 'desc' ? -cmp : cmp;

@@ -94,7 +94,7 @@ export class CopilotEngine {
 
     for await (const event of stream) {
       if (event.type === 'content_block_delta') {
-        const delta = event.delta as Record<string, unknown>;
+        const delta = event.delta as unknown as Record<string, unknown>;
         if (delta.type === 'text_delta') {
           yield { type: 'text', content: delta.text as string };
         }
@@ -214,7 +214,7 @@ export class CopilotEngine {
         const tool = tools.find(t => t.name === block.name);
         if (tool) {
           try {
-            const result = await tool.execute(block.input as Record<string, unknown>, context);
+            const result = await (tool as any).execute(block.input as Record<string, unknown>, context);
             toolResults.push({
               toolCallId: block.id,
               name: block.name,

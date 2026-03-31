@@ -4,7 +4,8 @@
 // audit logging, system config
 // ============================================================
 
-import { prisma } from '@vierp/database';
+import { prisma as _prisma } from '@vierp/database';
+const prisma = _prisma as any;
 
 // ==================== Types ====================
 
@@ -72,7 +73,7 @@ export class TenantManager {
       orderBy: { createdAt: 'desc' },
     });
 
-    return tenants.map(t => ({
+    return tenants.map((t: any) => ({
       id: t.id,
       name: t.name,
       slug: t.slug,
@@ -116,7 +117,7 @@ export class TenantManager {
       data: {
         email: data.adminEmail,
         name: data.adminName,
-        role: 'ADMIN',
+        role: 'ADMIN' as any,
         tenantId: tenant.id,
         isActive: true,
       },
@@ -252,12 +253,12 @@ export class AuditService {
   async log(entry: Omit<AuditEntry, 'id' | 'createdAt'>): Promise<void> {
     await prisma.auditLog.create({
       data: {
-        action: entry.action,
+        action: entry.action as any,
         entity: entry.entity,
         entityId: entry.entityId,
         changes: entry.changes as any,
         userId: entry.userId,
-        tenantId: entry.tenantId,
+        tenantId: entry.tenantId as any,
         ipAddress: entry.ipAddress,
         userAgent: entry.userAgent,
       },
@@ -278,7 +279,7 @@ export class AuditService {
     page?: number;
     pageSize?: number;
   }): Promise<{ data: AuditEntry[]; total: number }> {
-    const where: Record<string, unknown> = { tenantId: params.tenantId };
+    const where: Record<string, unknown> = { tenantId: params.tenantId } as any;
 
     if (params.entity) where.entity = params.entity;
     if (params.entityId) where.entityId = params.entityId;
@@ -305,14 +306,14 @@ export class AuditService {
     ]);
 
     return {
-      data: data.map(d => ({
+      data: data.map((d: any) => ({
         id: d.id,
         action: d.action,
         entity: d.entity,
-        entityId: d.entityId,
-        userId: d.userId,
-        userName: (d as any).user?.name || '',
-        tenantId: d.tenantId,
+        entityId: d.entityId || '',
+        userId: d.userId || '',
+        userName: d.user?.name || '',
+        tenantId: d.tenantId || '',
         changes: (d.changes as Record<string, { old: unknown; new: unknown }>) || {},
         ipAddress: d.ipAddress || undefined,
         userAgent: d.userAgent || undefined,

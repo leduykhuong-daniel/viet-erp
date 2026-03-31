@@ -156,7 +156,7 @@ function getMockChartData(chartId: string, timeRange: TimeRange): ChartData {
         {
           label: 'Sales | Bán Hàng',
           data: getRandomData(dataLength, 20, 100),
-          backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'],
+          backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'] as any,
           borderColor: '#ffffff',
         },
       ],

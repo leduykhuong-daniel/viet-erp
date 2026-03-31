@@ -79,7 +79,7 @@ export class Indexer {
       'mười',
     ];
 
-    await newIndex.updateSettings({
+    await (newIndex as any).updateSettings({
       searchableAttributes: config.searchableAttributes,
       filterableAttributes: config.filterableAttributes,
       sortableAttributes: config.sortableAttributes,
@@ -98,10 +98,10 @@ export class Indexer {
       },
     });
 
-    this.indices.set(entity, newIndex);
+    this.indices.set(entity, newIndex as any);
     this.indexConfigs.set(entity, config);
 
-    return newIndex;
+    return newIndex as any;
   }
 
   /**

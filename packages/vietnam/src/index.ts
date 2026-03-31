@@ -54,34 +54,17 @@ export default {
  */
 export const VietERP = {
   // Tax calculations
-  tax: {
-    vat: tax.vat,
-    pit: tax.pit,
-    cit: tax.cit,
-    reports: tax.reports,
-  },
+  tax: (tax as any).default ?? tax,
 
   // E-Invoicing
-  einvoice: {
-    generator: einvoice.generator,
-    providers: einvoice.providers,
-  },
+  einvoice: (einvoice as any).default ?? einvoice,
 
   // Insurance
-  insurance: {
-    bhxh: insurance.bhxh,
-    maternity: insurance.maternity,
-  },
+  insurance: (insurance as any).default ?? insurance,
 
   // Banking
-  banking: {
-    vietqr: banking.vietqr,
-    banks: banking.banks,
-  },
+  banking: (banking as any).default ?? banking,
 
   // Utilities
-  utils: {
-    currency: utils.currency,
-    date: utils.date,
-  },
+  utils: (utils as any).default ?? utils,
 };

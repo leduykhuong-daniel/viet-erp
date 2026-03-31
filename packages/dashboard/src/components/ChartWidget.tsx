@@ -8,7 +8,6 @@ import {
   LineChart,
   BarChart,
   PieChart,
-  DoughnutChart,
   Line,
   Bar,
   Pie,

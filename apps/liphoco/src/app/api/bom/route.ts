@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 /** GET /api/bom — Danh sách BOM */
 export async function GET(req: NextRequest) {
   const search = req.nextUrl.searchParams.get('search') || '';
